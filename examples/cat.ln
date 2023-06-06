@@ -1,0 +1,7 @@
+01 !nop() !nop() !nop()
+02 ~get(2) !nop() read()
+03 eq(1, 2)
+04 assert(3)
+05 stop()
+06 write(2)
+01
