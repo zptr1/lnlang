@@ -1,4 +1,5 @@
-import { readFileSync } from "fs";
+import { createInterface } from "readline/promises";
+import { readFileSync, readSync } from "fs";
 
 function err(msg) {
   console.error(`\x1b[31m${msg}\x1b[0m`);
@@ -25,6 +26,25 @@ const funcs = new Map()
   .set("write", [1, (ln) => {
     process.stdout.write(String.fromCharCode(result.get(ln) || 0));
     return 1;
+  }])
+  .set("input", [0, async () => {
+    const rl = createInterface(process.stdin, process.stdout);
+    const raw = await rl.question("");
+    const num = parseInt(raw);
+
+    if (!raw.match(/^-?\d+$/) || !Number.isSafeInteger(num)) {
+      err("invalid input");
+    }
+
+    rl.close();
+    return num;
+  }])
+  .set("read", [0, () => {
+    process.stdin.setRawMode(true);
+    const buffer = Buffer.alloc(1);
+    readSync(0, buffer, 0, 1);
+
+    return buffer.toString("utf-8").charCodeAt(0);
   }])
   .set("assert", [1, (ln) => {
     if (!result.has(ln) || result.get(ln) == 0) {
@@ -102,7 +122,7 @@ while (true) {
   
   for (const [prefix, name, args] of fns) {
     try {
-      const ret = funcs.get(name)[1](...args);
+      const ret = await funcs.get(name)[1](...args);
       res += prefix == "!"
         ? ret == 0
         : prefix == "~"
