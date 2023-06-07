@@ -1,3 +1,4 @@
+import { setTimeout as sleep } from "timers/promises";
 import { createInterface } from "readline/promises";
 import { readFileSync, readSync } from "fs";
 
@@ -13,6 +14,7 @@ if (!path) {
 }
 
 const result = new Map();
+
 const funcs = new Map()
   .set("nop", [0, () => 0])
   .set("get", [1, (ln) => {
@@ -72,6 +74,7 @@ const funcs = new Map()
 const raw = readFileSync(path, "utf-8")
   .split(/\n+/g)
   .map((x) => x.trim());
+
 const lines = [];
 
 for (const line of raw) {
@@ -80,7 +83,7 @@ for (const line of raw) {
   
   const lineno = parseInt(m[1]);
   const fns = m[2]
-    ? m[2].matchAll(/([~!]|)(\w+)\((\d+(?:, *\d+)*|)\)(?: +|$)/gm)
+    ? m[2].matchAll(/([~!]|)(\w+)\((\-?\d+(?:, *\-?\d+)*|)\)(?: +|$)/gm)
     : [];
   const ln = [];
 
@@ -115,9 +118,7 @@ if (lines.length == 0) {
 
 let line = lines[0], idx = 0;
 
-while (true) {
-  const [lineno, fns] = line;
-  let idxInc = 1;
+async function runLine(lineno, fns) {
   let res = 0;
   
   for (const [prefix, name, args] of fns) {
@@ -130,20 +131,29 @@ while (true) {
         : ret;
     } catch (err) {
       if (err == "assert") {
-        idxInc++;
-        break;
+        result.set(lineno, (result.get(lineno) || 0) + res);
+        return true;
       } else throw err;
     }
   }
-
+  
   result.set(lineno, (result.get(lineno) || 0) + res);
+  return false;
+}
+
+while (true) {
+  const [lineno, fns] = line;
+  const assert = await runLine(lineno, fns);
+
   if (idx > 0 && lineno != lines[idx - 1][0] + 1) {
     idx = lines.findIndex(([n], i) => i != idx && n == lineno);
   }
 
   line = lines[
-    idx += idxInc
+    idx += 1 + assert
   ];
-
-  if (!line) break;
+  
+  if (!line) {
+    process.exit();
+  }
 }
