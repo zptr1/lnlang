@@ -1,0 +1,13 @@
+-- Truth-machine program in lnlang --
+
+// Take an input and apply logical NOT to it
+// so it becomes 1 if it's zero and 0 if it's any other number.
+01 !input()
+
+// Exit if the input was 0
+02 assert(1)
+03 print(0) stop()
+
+// Print 1 infinitely
+04 ~get(4) !nop() !nop()
+03 print(4)

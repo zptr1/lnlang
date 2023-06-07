@@ -1,0 +1,16 @@
+-- Cat program in lnlang --
+
+// charcode of ctrl+c (3)
+01 !nop() !nop() !nop()
+
+// read 1 char from stdin
+02 ~get(2) !nop() read()
+
+// exit if the char is ctrl+c (3)
+03 eq(1, 2)
+04 assert(3)
+05 stop()
+
+// print the character and repeat
+06 print(2)
+01 

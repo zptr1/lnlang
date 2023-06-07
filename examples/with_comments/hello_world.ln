@@ -1,0 +1,38 @@
+-- "Hello, World!" program in lnlang --
+
+// This solution is probably not the best one
+// since I did it manually and that was the first thing I came up with.
+
+// 12
+01 !nop() !nop() !nop() !nop() !nop() !nop() !nop() !nop() !nop() !nop() !nop() !nop()
+
+// H
+02 get(1) get(1) get(1) get(1) get(1) get(1) 
+// e
+03 get(2) get(1) get(1) !nop() !nop() !nop() !nop() !nop() 
+// l
+04 get(2) get(1) get(1) get(1)
+// o
+05 get(4) !nop() !nop() !nop()
+
+// 8
+06 !nop() !nop() !nop() !nop() !nop() !nop() !nop() !nop()
+
+// comma
+07 get(1) get(1) get(1) get(6)
+// space
+08 get(1) get(1) get(6)
+
+// W
+09 get(2) get(1) !nop() !nop() !nop()
+// r
+10 get(5) !nop() !nop() !nop()
+// d
+11 get(3) ~nop()
+// !
+12 get(8) !nop()
+// newline
+13 get(1) ~nop() ~nop()
+
+// print
+14 write(2) write(3) write(4) write(4) write(5) write(7) write(8) write(9) write(5) write(10) write(4) write(11) write(12) write(13)

@@ -1,0 +1,17 @@
+// Take two numbers
+01 input()
+02 input()
+
+// add first input to sum
+03 get(1)
+
+// increment
+04 !nop()
+
+// print sum & exit if the increment equals to the second input
+05 eq(4, 2)
+06 assert(5)
+07 print(3) stop()
+
+// repeat
+02
