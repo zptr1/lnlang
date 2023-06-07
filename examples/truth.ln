@@ -1,5 +1,5 @@
-01 input()
-02 eq(1, -1)
-03 print(1) assert(2)
-04 stop()
-01
+01 !input()
+02 assert(1)
+03 print(0) stop()
+04 ~get(4) !nop() !nop()
+03 print(4)
