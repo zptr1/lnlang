@@ -33,9 +33,9 @@ In the example above, the first line is ignored because it doesn't start with a 
 
 In the example above, the `nop` function is called twice with the logical NOT modifier applied on the first line. Since `nop()` always returns zero, we can use logical NOT modifier to convert `0` to `1`. The results of both calls are added together, resulting in `2`.
 
-The `get(n)` function retrieves the result of a specific line (`n`). In this case, `get(1)` returns `2` because line 1 resulted in `2`. Calling `get(n)` multiple times on the same line is equivalent to `n1 + n2 + ...`.
+The `get(ln)` function retrieves the result of a specific line (`n`). In this case, `get(1)` returns `2` because line 1 resulted in `2`. Calling `get(ln)` multiple times on the same line is equivalent to `n1 + n2 + ...`.
 
-The `print(n)` function outputs the result of a provided line (`n`) as a number.
+The `print(ln)` function outputs the result of a provided line (`n`) as a number.
 
 Translated into pseudocode, the example can be represented as follows:
 ```py
@@ -46,7 +46,7 @@ print(b)
 
 ## Control Flow
 
-### `goto`/`jump`
+### goto (or jump)
 
 In **lnlang**, the order of line numbers is not enforced. If the current line's number does not follow the sequential order, a jump is performed to the next line with the correct number.
 
@@ -78,7 +78,7 @@ As a result, the value stored for line 01 keeps increasing, leading to an infini
 
 ### Conditions
 
-You can use the `assert(n)` function to implement conditions in **lnlang**. This function checks the value of the provided line and skips the current and the next line if the value equals `0`.
+You can use the `assert(ln)` function to implement conditions in **lnlang**. This function checks the value of the provided line and skips the current and the next line if the value equals `0`.
 
 Example:
 
@@ -131,12 +131,12 @@ possible ig but good luck with that lmao
 | Signature         | Description |
 |-------------------|-------------|
 | `nop()`           | Performs no operation and always returns zero. |
-| `get(n)`          | Retrieves and returns the result stored for a specific line. |
-| `print(n)`        | Outputs the value of the provided line as a number. Returns the number of digits. |
-| `input(n)`        | Reads a number from stdin and returns it. |
-| `write(n)`        | Writes the character corresponding to the unicode code of the provided line's value to stdout. Returns `1`. |
-| `read(n)`         | Reads one character from stdin and returns its unicode charcode. |
-| `assert(n)`       | Checks if the value of the provided line is zero. If it is, it skips the current and the next lines. |
+| `get(ln)`         | Retrieves and returns the result stored for a specific line. |
+| `print(ln)`       | Outputs the value of the provided line as a number. Returns the number of digits. |
+| `input(ln)`       | Reads a number from stdin and returns it. |
+| `write(ln)`       | Writes the character corresponding to the unicode code of the provided line's value to stdout. Returns `1`. |
+| `read(ln)`        | Reads one character from stdin and returns its unicode charcode. |
+| `assert(ln)`      | Checks if the value of the provided line is zero. If it is, it skips the current and the next lines. |
 | `eq(a, b)`        | Compares the values of two lines. Returns `1` if they are equal and `0` otherwise. |
 | `lt(a, b)`        | Checks if the first line is less than the second line |
 | `gt(a, b)`        | Checks if the first line is greater than the second line |
