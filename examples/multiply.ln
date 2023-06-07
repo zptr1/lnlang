@@ -1,0 +1,8 @@
+01 input()
+02 input()
+03 get(1)
+04 !nop()
+05 eq(4, 2)
+06 assert(5)
+07 print(3) stop()
+02
