@@ -150,6 +150,7 @@ possible ig but good luck with that lmao
 | `write(ln)`       | Writes the character corresponding to the unicode code of the provided line's value to stdout. Returns `1`. |
 | `read(ln)`        | Reads one character from stdin and returns its unicode charcode. |
 | `assert(ln)`      | Checks if the value of the provided line is zero. If it is, it skips the current and the next lines. |
+| `call(ln)`        | Executes the specified line without performing a jump to it |
 | `eq(a, b)`        | Compares the values of two lines. Returns `1` if they are equal and `0` otherwise. |
 | `lt(a, b)`        | Checks if the first line is less than the second line |
 | `gt(a, b)`        | Checks if the first line is greater than the second line |
