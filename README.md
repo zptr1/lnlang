@@ -117,7 +117,7 @@ In this example, line 1 is set to `0`, so the `assert(1)` condition fails, causi
 04 print(3)
 ```
 
-First, we set the value of `a` to 5 and `b` to 3 using multiple `!nop()` function calls. Then, we calculate `c` by adding `a` with the bitwise NOT of `b` and adding 1. The bitwise NOT of 3 is -4. Finally, we print the value of `c`, which is 2.
+First, we set the value of the first line to 5 and the second line to 3 using multiple `!nop()` function calls. Then, we subtract line 2 from line 1 by adding line 1 with the bitwise NOT of line 2 and adding 1. The bitwise NOT of 3 is -4, so adding 1 would be the same as just negating it. Finally, we print the result, which should be 2.
 
 Translated into pseudocode, the example can be represented as follows:
 ```py
