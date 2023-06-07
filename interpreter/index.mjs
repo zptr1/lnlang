@@ -1,4 +1,3 @@
-import { setTimeout as sleep } from "timers/promises";
 import { createInterface } from "readline/promises";
 import { readFileSync, readSync } from "fs";
 
@@ -31,7 +30,7 @@ const funcs = new Map()
   }])
   .set("input", [0, async () => {
     const rl = createInterface(process.stdin, process.stdout);
-    const raw = await rl.question("");
+    const raw = await rl.question("\x1b[1;30minput:\x1b[0m ");
     const num = parseInt(raw);
 
     if (!raw.match(/^-?\d+$/) || !Number.isSafeInteger(num)) {
@@ -56,16 +55,22 @@ const funcs = new Map()
     }
   }])
   .set("eq", [2, (a, b) => {
-    return Number(result.get(a) == result.get(b));
+    return Number((result.get(a) || 0) == (result.get(b) || 0));
   }])
   .set("lt", [2, (a, b) => {
-    return Number(result.get(a) < result.get(b));
+    return Number((result.get(a) || 0) < (result.get(b) || 0));
   }])
   .set("gt", [2, (a, b) => {
-    return Number(result.get(a) > result.get(b));
+    return Number((result.get(a) || 0) > (result.get(b) || 0));
   }])
   .set("stop", [0, () => {
     process.exit();
+  }])
+  .set("call", [1, async (ln) => {
+    const line = lines.find(([n]) => n == ln);
+    await runLine(line[0], line[1]);
+
+    return 0;
   }])
   .set("debug", [-1, (...chars) => {
     console.log(`\x1b[1m[DEBUG]\x1b[1;30m ${chars.map((x) => String.fromCharCode(x)).join("")}\x1b[0m`);

@@ -2,13 +2,13 @@
 
 **lnlang** is an esoteric programming language where the code consists of numbered lines that dictate the program's execution flow. Each line can contain function calls that return numeric values, and the sum of these results is stored for each line after execution.
 
-## Basic Guide
+# Basic Guide
 
 - Each line starts with a number and is followed by a list of function calls.
 - Functions can be called with numeric arguments and always return a numeric value.
 - The sum of function results is stored for each line after it's executed.
 
-### Example
+**Example**
 ```
 This line is ignored
 1 example(1, 2, 3) test(69)
@@ -19,12 +19,12 @@ This line is ignored
 
 In the example above, the first line is ignored because it doesn't start with a number. Line 1 calls the `example` and `test` functions, the next line calls the `hello` function, and the next calls the `world`, `helloworld`, and `test` functions. Line 4 is considered a valid line but doesn't have any function calls.
 
-### Function Modifiers
+## Function Modifiers
 
 - Function calls can be prefixed with `~` (bitwise NOT) or `!` (logical NOT) modifiers.
 - Modifiers are applied to the returned result of the function.
 
-### Example
+**Example**
 ```scss
 01 !nop() !nop()
 02 get(1) get(1)
@@ -75,6 +75,19 @@ For example, the following program counts from one to infinity:
 In the example above a jump to the start is performed when line 00 is encountered.
 If the same line number is encountered multiple times, its result is added to the previously stored result instead of overriding it.
 As a result, the value stored for line 01 keeps increasing, leading to an infinite counting loop.
+
+### Calls
+
+An important feature in this language is the `call(ln)` function, which allows for the execution of a specific line without triggering a jump to it. Additionally, **lnlang** incorporates a callstack, enabling recursive operations and more complex program flows.
+
+```scss
+01 call(3)
+02 stop()
+03 do_something()
+04 this_wont_be_executed()
+```
+
+In the provided example, line 1 employs `call(3)` to invoke line 3 for execution. Consequently, the program proceeds to execute the `do_something()` function. However, the execution does not continue to line 4 since no jump was initiated. This behavior provides fine-grained control over program flow and allows for more flexible and intricate operations.
 
 ### Conditions
 
