@@ -4,4 +4,4 @@
 
 You can find the examples in the [`examples`](examples) directory
 
-**Esolangs Wiki:** https://esolangs.org/wiki/Lnlang
+**Guide:** https://esolangs.org/wiki/Lnlang
